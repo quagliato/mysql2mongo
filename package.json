@@ -1,0 +1,35 @@
+{
+  "name": "mysql2mongo",
+  "version": "1.0.0",
+  "description": "It imports the MySQL records to a Mongo-based database",
+  "main": "run.js",
+  "scripts": {
+    "start": "node run.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Eduardo Quagliato <eduardo@quagliato.me>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "async": "^2.1.2",
+    "mongodb": "^2.2.11",
+    "mongoskin": "^2.1.0",
+    "spawl": "0.0.4",
+    "spawl-mariadb": "0.0.6"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quagliato/mysql2mongo.git"
+  },
+  "keywords": [
+    "mysql",
+    "mariadb",
+    "mongodb",
+    "importer",
+    "ltv"
+  ],
+  "bugs": {
+    "url": "https://github.com/quagliato/mysql2mongo/issues"
+  },
+  "homepage": "https://github.com/quagliato/mysql2mongo#readme"
+}

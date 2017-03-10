@@ -1,0 +1,15 @@
+{
+  "MYSQL_SETTINGS": {
+    "DB_HOST": "",
+    "DB_USER": "",
+    "DB_PASS": "",
+    "DB_NAME": ""
+  },
+  "MONGODB_SETTINGS": {
+    "DB_HOST": "",
+    "DB_PORT": "",
+    "DB_NAME": ""
+  },
+  "WHAT_2_IMPORT": [],
+  "REPLACES": []
+}
