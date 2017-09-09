@@ -179,6 +179,46 @@ So, in the example above, the script will get the value of property
 `collection2.table1_id` and will search the object that has the same value in `collection1.__old_id`. After that it will create in 
 `collection2.collection1_id` with the value of the field 'collection1._id`.
 
+In the root configuration object, you can set up one of the options below:
+
+1. Regular update
+
+In this mode, the replace engine will update every single record, one by one.
+To use this way, you have to set it up like this:
+
+```json
+{
+  "REPLACE_1B1_UPDATE": true
+}
+```
+
+**Attention**: do not use this mode with a lote of records, it can blow you 
+memory.
+
+2. Batch update
+
+This way, the replace is by batch, so it replaces every record that uses the
+id X by the id Y. This is the default mode, so you do not need to set it up.
+
+**Attention**: it uses a concurrency of 5 simultaneous process, so overhaul it 
+by your own will and take consequences.
+
+3. Batch update by bulk
+
+This is the nuke! It run batch updates, but run the updates by bulks. This can
+be tricky, so take care. To set it up, do like this in the root configuration
+json:
+
+```json
+{
+  "REPLACE_BATCH_BULK_UPDATE": true
+}
+```
+
+**Attention**: it runs 10 operations concurrency with 50 batch updates each in
+01 bulk concurrency. Overhaul it by your own will and take consequences.
+
+
 -----
 
 ## Get in touch

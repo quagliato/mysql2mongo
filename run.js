@@ -346,9 +346,6 @@ function batchUpdate (search, callback, retry) {
     log(`Retry ${retry} of collection ${search.collection}`, 'ERROR')
   }
 
-  // db.collection(search.search_collection).createIndex(search.search_field, [[search.search_field, 1]]);
-  // db.collection(search.collection).createIndex(search.field, [[search.field, 1]]);
-
   let index = {}
   index[search.search_field] = 1
   db.collection(search.search_collection).createIndex(index)
@@ -556,17 +553,22 @@ async.eachSeries(what2import, function (importation, callback) {
   async.eachSeries(config.REPLACES, function (replace, callback) {
     // Updates cross-referenced fields between collections
     shortcut = {}
-    // update(replace, 1, 1000, function(err, result){
-    //   callback(err);
-    // });
 
-    return batchUpdate(replace, function (err, result) {
+    if (config.REPLACE_1B1_UPDATE === true) {
+      return update(replace, 1, 1000, (err, result) => {
+        callback(err)
+      })
+    }
+
+    if (config.REPLACE_BATCH_BULK_UPDATE === true) {
+      return batchUpdateBulk(replace, (err, result) => {
+        callback(err)
+      })
+    }
+
+    return batchUpdate(replace, (err, result) => {
       callback(err)
     })
-
-    // return batchUpdateBulk(replace, function(err, result){
-    //   callback(err);
-    // });
   }, function (err) {
     if (err) return throwError(err)
     process.exit(0)
