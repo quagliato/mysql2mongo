@@ -4,6 +4,58 @@
 
 It imports MySQL tables into MongoDB collections.
 
+## How does it do it?
+
+First of all, it uses a mapping file to know which table to import to which 
+collection and which column to import to which property of the new document.
+Take a looking at *Table mapping* down below.
+
+It imports in batches, so it paginates the requests to MySQL and execute 
+concurrent requests.
+
+After importation the next step is replace. The replace engine cross-update
+foreign key fields by its new ObjectId in Mongo. So it searches for old id *X* 
+from *collection 1* in old id *A* from *collection 2* and replaces new property 
+*B* by the value in property *Y* in the document identified by old id *X*, just 
+like this:
+
+**Before replace**:
+
+*document 1 (collection 1)*
+```json
+{
+  id: ObjectId("X"),
+  collection2_id: "B",
+  __old_id: "Y"
+}
+```
+
+*document 2 (collection 2)*
+```json
+{
+  id: ObjectId("A"),
+  collection2_id: "Y",
+  __old_id: "B"
+}
+```
+
+**After replace**:
+*document 1 (collection 1)*
+```json
+{
+  id: ObjectId("X"),
+  collection2_id: ObjectId("A")
+}
+```
+
+*document 2 (collection 2)*
+```json
+{
+  id: ObjectId("A"),
+  collection2_id: ObjectId("X")
+}
+```
+
 ## Setup
 
 There are 4 levels of configuration and 3 of them are mandatory:
