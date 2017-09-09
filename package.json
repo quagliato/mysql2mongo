@@ -11,12 +11,12 @@
   "license": "UNLICENSED",
   "dependencies": {
     "async": "^2.1.2",
+    "eslint": "^4.6.1",
     "mongodb": "^2.2.11",
     "mongoskin": "^2.1.0",
     "spawl": "0.0.4",
     "spawl-mariadb": "0.0.6"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/quagliato/mysql2mongo.git"
@@ -25,11 +25,17 @@
     "mysql",
     "mariadb",
     "mongodb",
-    "importer",
-    "ltv"
+    "importer"
   ],
   "bugs": {
     "url": "https://github.com/quagliato/mysql2mongo/issues"
   },
-  "homepage": "https://github.com/quagliato/mysql2mongo#readme"
+  "homepage": "https://github.com/quagliato/mysql2mongo#readme",
+  "devDependencies": {
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1"
+  }
 }
