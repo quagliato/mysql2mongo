@@ -219,40 +219,6 @@ function importTableAsync (tableName, collectionName, tableFields, page, pageSiz
 /*
  * 2017-02-27, Curitiba - Brazil
  * Author: Eduardo Quagliato<eduardo@quagliato.me>
- * Description: The definitive try to load a MongoDB collection paginated
- */
-function loadCollection (collectionName, page, pageSize, resultObjects, callback, retry) {
-  if (page === undefined) page = 1
-  if (pageSize === undefined) pageSize = 1000
-  if (resultObjects === undefined) resultObjects = {}
-
-  log(`Loading collection ${collectionName} / page ${page}, size: ${pageSize}`)
-  if (retry !== undefined) {
-    log(`Retry ${retry} of collection ${collectionName}, page ${page}  (size: ${pageSize})`, 'ERROR')
-  }
-
-  db.collection(collectionName).find({}).limit(pageSize).skip((page - 1) * pageSize).sort({ migrated: 1 }).toArray(function (err, result) {
-    if (err) {
-      if (retry === undefined) retry = 0
-      retry += 1
-      return loadCollection(collectionName, page, pageSize, resultObjects, callback, retry)
-    }
-
-    if (result.length === 0) return callback(null, resultObjects)
-
-    for (let i = 0; i < result.length; i++) {
-      const row = result[i]
-      resultObjects[row.__old_id] = row
-    }
-
-    if (result.length < pageSize) return callback(null, resultObjects)
-    else return loadCollection(collectionName, (page + 1), pageSize, resultObjects, callback)
-  })
-};
-
-/*
- * 2017-02-27, Curitiba - Brazil
- * Author: Eduardo Quagliato<eduardo@quagliato.me>
  * Description: It updates cross-reference between collections
  */
 function update (search, page, pageSize, callback, retry) {
