@@ -1,6 +1,6 @@
 {
   "name": "mysql2mongo",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "It imports the MySQL records to a Mongo-based database",
   "main": "run.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Eduardo Quagliato <eduardo@quagliato.me>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "async": "^2.1.2",
     "eslint": "^4.6.1",
