@@ -22,7 +22,7 @@ like this:
 **Before replace**:
 
 *document 1 (collection 1)*
-```json
+```js
 {
   id: ObjectId("X"),
   collection2_id: "B",
@@ -31,7 +31,7 @@ like this:
 ```
 
 *document 2 (collection 2)*
-```json
+```js
 {
   id: ObjectId("A"),
   collection2_id: "Y",
@@ -41,7 +41,7 @@ like this:
 
 **After replace**:
 *document 1 (collection 1)*
-```json
+```js
 {
   id: ObjectId("X"),
   collection2_id: ObjectId("A")
@@ -49,7 +49,7 @@ like this:
 ```
 
 *document 2 (collection 2)*
-```json
+```js
 {
   id: ObjectId("A"),
   collection2_id: ObjectId("X")
